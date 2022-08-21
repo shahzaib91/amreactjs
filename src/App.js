@@ -4,12 +4,11 @@ import Header from './components/Header';
 import Home from './routes/Home';
 
 
-function App() 
-{
+function App() {
   return (
     <>
       <Header />
-      <div className='container my-3'>
+      <div className='container mb-3' style={{ marginTop: "80px" }}>
         <Routes>
           <Route path='/' element={<Home />}></Route>
         </Routes>
