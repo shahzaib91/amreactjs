@@ -1,11 +1,38 @@
-import React from 'react'
-import ArticleItem from '../components/ArticleItem'
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBlogList } from "../redux/actions/BlogActions";
+import ArticleItem from '../components/ArticleItem';
+import HttpHandler from '../globals/HttpHandler';
+import { ExclamationCircleFill } from 'react-bootstrap-icons';
 
 export default function Home() 
 {
+    const {BlogData} = useSelector((state)=>state);
+    const {http, baseUrl} = HttpHandler();
+    const dispatch = useDispatch()
+
+    const fetcBlogList = async () => {
+        const response = await http.get(baseUrl+"readBlogs").catch((err)=>{
+            console.log(err);
+            alert("Failed! "+err.code+" "+err.message);
+        });
+        if(response.data.records!=null)
+        {
+            dispatch(setBlogList(response.data.records));
+        }
+    }
+
+    useEffect(() => {
+        fetcBlogList();
+    },[]);
+
     return (
         <>
-            <ArticleItem title="What is Lorem Ipsum?" content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." timestamp="2022-08-20 11:15 PM" />
+            {
+                BlogData.BlogList.length>0 ? 
+                BlogData.BlogList.map( (item, i) => ( <ArticleItem key={i} title={item.title} content={item.content} timestamp={item.timestamp} /> )) 
+                : (<div className='alert alert-info'><ExclamationCircleFill /> No articles to display!</div>)
+            }
         </>
     )
 }
