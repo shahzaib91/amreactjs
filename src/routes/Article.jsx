@@ -4,6 +4,7 @@ import HttpHandler from '../globals/HttpHandler';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBlogItem, resetBlogItem } from '../redux/actions/BlogActions';
 import { setError, resetError } from '../redux/actions/ValidationActions';
+import CommentForm from '../components/CommentForm';
 
 export default function Home() {
     const article       = useSelector((state) => state.Article);
@@ -43,19 +44,7 @@ export default function Home() {
                             <h1>{article.title}</h1>
                             <p>{article.content}</p>
                         </div>
-                        <div className='navbar-light bg-light my-5 px-5 py-5'>
-                            <h3>Submit Comment</h3>
-                            <fieldset>
-                                <div className='form-group'>
-                                    <label className='my-2'>Your Name</label>
-                                    <input type="text" placeholder="Name" className="form-control my-2" />
-                                </div>
-                                <div className='form-group'>
-                                    <label className='my-2'>Comment</label>
-                                    <textarea type="text" placeholder="Comment" className="form-control my-2" rows="3" />
-                                </div>
-                            </fieldset>
-                        </div>
+                        <CommentForm blog_id={id} />
                     </>
                 )
             }
