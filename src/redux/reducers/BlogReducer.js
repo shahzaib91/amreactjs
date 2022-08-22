@@ -26,3 +26,14 @@ export const ArticleReducer = (state = {}, { type, payload }) => {
             return state;
     }
 }
+
+export const ArticleCommentsReducer = (state = {}, { type, payload }) => {
+    switch (type) {
+        case ActionTypes.SET_COMMENT_LIST:
+            return payload;
+        case ActionTypes.RESET_COMMENT_LIST:
+            return state;
+        default:
+            return state;
+    }
+}

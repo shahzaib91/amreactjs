@@ -9,12 +9,12 @@ import { ExclamationCircleFill } from 'react-bootstrap-icons';
 export default function Home() 
 {
     const {BlogList}        = useSelector((state)=>state.BlogData);
-    const {http, baseUrl}   = HttpHandler();
+    const {http}            = HttpHandler();
     const dispatch          = useDispatch();
     const error             = useSelector((state) => state.Validation);
 
     const fetcBlogList = async () => {
-        const response = await http.get(baseUrl+"readBlogs").catch((err)=>{
+        const response = await http.get("readBlogs").catch((err)=>{
             dispatch(setError(err.code+" "+err.message));
         });
         if(response.data.records!=null)

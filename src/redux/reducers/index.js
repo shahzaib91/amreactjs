@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import { ListReducer, ArticleReducer } from "../reducers/BlogReducer";
+import { ListReducer, ArticleReducer, ArticleCommentsReducer } from "../reducers/BlogReducer";
 import { ValidationReducer } from "../reducers/ValidationReducer";
 
 const reducers = combineReducers ({
     BlogData     :   ListReducer,
     Article      :   ArticleReducer,
-    Validation   :   ValidationReducer
+    Validation   :   ValidationReducer,
+    CommentList  :   ArticleCommentsReducer
 });
 export default reducers;

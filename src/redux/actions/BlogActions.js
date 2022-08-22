@@ -26,3 +26,16 @@ export const resetBlogItem = () => {
         type    :   ActionTypes.RESET_BLOG_ITEM
     };
 };
+
+export const setArticleComments = (comments) => {
+    return { 
+        type    : ActionTypes.SET_COMMENT_LIST, 
+        payload : comments 
+    };
+};
+
+export const resetArticleComments = () => {
+    return { 
+        type    : ActionTypes.RESET_COMMENT_LIST
+    };
+};
