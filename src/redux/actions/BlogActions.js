@@ -13,3 +13,16 @@ export const getBlogItem = (article) => {
         payload :   article
     };
 };
+
+export const delBlogItem = (id) => {
+    return {
+        type    :   ActionTypes.DEL_BLOG_ITEM,
+        payload :   id
+    };
+};
+
+export const resetBlogItem = () => {
+    return {
+        type    :   ActionTypes.RESET_BLOG_ITEM
+    };
+};

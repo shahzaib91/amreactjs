@@ -1,15 +1,27 @@
+import { Action } from "history";
 import { ActionTypes } from "../constants/ActionTypes"
 
 const initialState = {
-    BlogList    :   []
+    BlogList: []
 }
 
-export const BlogReducer = (state = initialState, {type, payload}) =>
-{
-    switch(type)
-    {
+export const ListReducer = (state = initialState, { type, payload }) => {
+    switch (type) {
         case ActionTypes.SET_BLOG_LIST:
-            return {...state, BlogList : payload};
+            return { ...state, BlogList: payload };
+        case ActionTypes.DEL_BLOG_ITEM:
+            return { ...state, BlogList: state.BlogList.filter(i=>i.id !== payload)};
+        default:
+            return state;
+    }
+}
+
+export const ArticleReducer = (state = {}, { type, payload }) => {
+    switch (type) {
+        case ActionTypes.GET_BLOG_ITEM:
+            return { ...state, ...payload };
+        case ActionTypes.RESET_BLOG_ITEM:
+            return { };
         default:
             return state;
     }
